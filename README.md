@@ -1,0 +1,2 @@
+# LebenswegAI
+Minha inteligência artificial
