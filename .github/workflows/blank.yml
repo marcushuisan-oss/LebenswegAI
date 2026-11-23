@@ -11,6 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: LebenswegAI
+
     steps:
       - name: Baixar projeto
         uses: actions/checkout@v4
@@ -22,13 +26,10 @@ jobs:
           java-version: '17'
 
       - name: Configurar Gradle
-        uses: gradle/gradle-build-action@v3
-        with:
-          gradle-version: '8.9'
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Configurar Android SDK
-        run: |
-          echo "sdk.dir=$ANDROID_HOME" > local.properties
+        run: echo "sdk.dir=$ANDROID_HOME" > local.properties
 
       - name: Compilar aplicativo
         run: gradle assembleDebug
@@ -37,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: LebenswegAI-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: LebenswegAI/app/build/outputs/apk/debug/app-debug.apk
